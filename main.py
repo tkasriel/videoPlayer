@@ -32,6 +32,9 @@ class Main:
 		# Admire this in its full 4 fps beauty
 		while not glfw.window_should_close(self.window.window):
 			currFrame = self.currVideo.nextFrame()[::-1]
+			if not len(currFrame):
+				glfw.terminate()
+				sys.exit(0)
 			img_byte_arr = currFrame.tobytes()
 			# currFrame.save(img_byte_arr, format='PNG')
 			# img_byte_arr = img_byte_arr.getvalue()
@@ -41,7 +44,7 @@ class Main:
 			glfw.poll_events()
 
 			# Time-related stuff
-			print (f"FPS: {1/(time.time()-prevTime)}; targe: {fps}")
+			# print (f"FPS: {1/(time.time()-prevTime)}; target: {fps}")
 			remainingTickTime = max(1/fps - (time.time() - prevTime), 0)
 			time.sleep(remainingTickTime)
 			prevTime = time.time()

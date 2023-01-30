@@ -17,7 +17,10 @@ class VideoManager:
     	# 	plugin="pyav",
 		# )
 		# self.currFrame += 1
-		return next(self.video)
+		try:
+			return next(self.video)
+		except StopIteration:
+			return []
 
 	def changeFrame(self, frame):
 		self.currFrame = frame
