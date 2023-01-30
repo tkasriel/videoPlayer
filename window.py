@@ -18,7 +18,7 @@ class Window ():
 
 		
 		'''
-		self.displayMode = GL_RGBA
+		self.displayMode = GL_RGB
 		self.width = width
 		self.height = height
 		self.currFrame = initFrame
@@ -98,17 +98,16 @@ if __name__ == "__main__":
 	offset = 0
 
 	def createFrame():
-		frame = bytearray(600*500*4)
-		for i in range(0, 600*500*4, 4):
+		frame = bytearray(600*500*3)
+		for i in range(0, 600*500*3, 3):
 
-			col = (i//4) % 600 + offset
-			row = (i//4) // 600
+			col = (i//3) % 600 + offset
+			row = (i//3) // 600
 			r,g,b = colorsys.hsv_to_rgb(col/600, (row/500) % 1, 1)
 			# print (g * 255)
 			frame[i] = int(r*255)
 			frame[i+1] = int(g*255)
 			frame[i+2] = int(b*255)
-			frame[i+3] = 255
 		return frame
 
 	
